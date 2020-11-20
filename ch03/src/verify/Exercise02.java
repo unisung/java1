@@ -11,6 +11,8 @@ public class Exercise02{
 	int z=(++x) + (y--);
 
 	System.out.println(z);
+	System.out.println(x);
+	System.out.println(y);
 
 	}
 
