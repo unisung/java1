@@ -21,7 +21,5 @@ public class ArrayDeclareNotValuesExample2 {
 			  sum+=intArr[i];
 		 }
 		 System.out.println("ЦђБе:"+sum/intArr.length);
-
 	}
-
 }
