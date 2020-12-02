@@ -3,7 +3,7 @@ package verify.ch20_ch02;
 import java.util.Scanner;
 
 public class StockApplication {
-	private static Item[] accountArray = new Item[100];
+	private static Item[] stockArray = new Item[100];
 	private static Scanner scanner = new Scanner(System.in);
 	private static int seq;//0
 	
@@ -16,9 +16,9 @@ public class StockApplication {
 	   int selectNo = scanner.nextInt();
 	 
 	if(selectNo==1){
-	  createAccount();
+	  createItem();
 	}else if(selectNo==2){
-	  accountList();
+	  stockList();
 	}else if(selectNo==3){
 	 deposit();
 	}else if(selectNo==4){
@@ -31,7 +31,7 @@ public class StockApplication {
 	}
 
 	  //계좌생성하기
-  private static void createAccount(){
+  private static void createItem(){
    //계좌번호 입력
 	//  System.out.println("계좌번호>");
 	//  String ano=scanner.next();
@@ -45,9 +45,9 @@ public class StockApplication {
     //String.format("포멧",값);
     //"포멧" -%03d <-십진수(digit) 3:전체 세자리, 0:빈공백은 0으로 채움
     Item acc =new Item("111-"+String.format("%03d",++seq), owner, balance);
-    for(int i=0;i<accountArray.length;i++) {
-    	 if(accountArray[i]==null) { 
-    		 accountArray[i]=acc;
+    for(int i=0;i<stockArray.length;i++) {
+    	 if(stockArray[i]==null) { 
+    		 stockArray[i]=acc;
     		 break;
     	 }
     }
@@ -55,11 +55,11 @@ public class StockApplication {
 	}
 
 	//계좌목록보기
-	private static void accountList(){
+	private static void stockList(){
 	 //작성위치
-		for(int i=0;i<accountArray.length;i++) {
-	    	 if(accountArray[i]!=null) {
-	    		 Item acc=accountArray[i];
+		for(int i=0;i<stockArray.length;i++) {
+	    	 if(stockArray[i]!=null) {
+	    		 Item acc=stockArray[i];
 	    		 System.out.println(acc.getAno()+","
 	    		            +acc.getOwner()+","+acc.getBalance()); 
 	    	 }
@@ -75,9 +75,9 @@ public class StockApplication {
      System.out.println("입금액");
      int balance =scanner.nextInt();
  
-     Item acc=findAccount(ano);    
+     Item acc=findItem(ano);    
      if(acc!=null) {
-    	acc.setBalance(acc.getBalance()+balance);
+    	acc.setQty(acc.getQty()+balance);
      }else {
     	 System.out.println("해당계좌번호가 없습니다.");
      }
@@ -93,24 +93,24 @@ public class StockApplication {
 	     System.out.println("입금액");
 	     int balance =scanner.nextInt();
 	 
-	     Item acc=findAccount(ano);    
+	     Item acc=findItem(ano);    
 	     if(acc!=null) {
-	    	 if(acc.getBalance()-balance<0) {
+	    	 if(acc.getQty()-balance<0) {
 	    		 System.out.println("출금액이 잔고보다 많습니다.");
 	    		 return;
 	    	 }
-	    	acc.setBalance(acc.getBalance()-balance);
+	    	acc.setQty(acc.getQty()-balance);
 	     }else {
 	    	 System.out.println("해당계좌번호가 없습니다.");
 	     }
 	}
 
 	  //Account 배열에서 ano와 동일한 Account 객체 찾기
-	private static Item findAccount(String ano){
-      for(int i=0;i<accountArray.length;i++) {
-    	  if(accountArray[i]!=null) {
-    		  Item acc=accountArray[i];
-    		  if(acc.getAno().equals(ano)) return acc;
+	private static Item findItem(String ano){
+      for(int i=0;i<stockArray.length;i++) {
+    	  if(stockArray[i]!=null) {
+    		  Item acc=stockArray[i];
+    		  if(acc.getItemCode().equals(ano)) return acc;
     	  }
       }
 	 //작성위치
