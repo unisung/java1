@@ -1,21 +1,20 @@
-package verify.ch20_ch02;
+package verify.ch20_ch03;
 
 import java.util.Scanner;
 
-public class StockApplication {
-	private static Item[] stockArray = new Item[100];
+public class MemberApplication {
+	private static Member[] memberArray = new Member[100];
 	private static Scanner scanner = new Scanner(System.in);
-	private static int seq;//0
 	
-	  public static void main(String[] args){
+ public static void main(String[] args){
 	  boolean run=true;
 	while(run){
 	    printMenu();
 	   int selectNo = scanner.nextInt();
 	if(selectNo==1){
-	  createItem();
+	  createMember();
 	}else if(selectNo==2){
-	  stockList();
+	  memberList();
 	}else if(selectNo==3){
 	 deposit();
 	}else if(selectNo==4){
@@ -27,36 +26,32 @@ public class StockApplication {
 	System.out.println("프로그램 종료");
 	}
 
-	//상품재고 생성하기
+	//회원 생성하기
   private static void createItem(){
-   //상품명
+   //회원id
+	  System.out.println("id>");
+	  String id=scanner.next();
+	//회원id
+	  System.out.println("비밀번호>");
+	  String password=scanner.next();
+ 
+	//회원이름
 	  System.out.println("상품명>");
 	  String name=scanner.next();
-   //초기 재고 입력
-      System.out.println("초기재고>");
-     int qty=scanner.nextInt();
-    
-    //String.format("포멧",값);
-    //"포멧" -%06d <-십진수(digit) 6:전체 세자리, 0:빈공백은 0으로 채움
-    Item item =new Item("88-"+String.format("%06d",++seq), name, qty);
-    for(int i=0;i<stockArray.length;i++) {
-    	 if(stockArray[i]==null) { 
-    		 stockArray[i]=item;
-    		 break;
-    	 }
-    }
-
+     
+	  for(int i=0;i<memberArray.length;i++)
+		  if(memberArray[i]==null) {
+	        memberArray[i]=new Member(id, password, name);
+		  break;
+		  }
 	}
 
-	//상품목록보기
+	//회원리스트 보기
 	private static void stockList(){
 	 //작성위치
-		for(int i=0;i<stockArray.length;i++) {
-	    	 if(stockArray[i]!=null) {
-	    		 Item item=stockArray[i];
-	    		 System.out.println(item.getItemCode()+","
-	    		            +item.getName()+","+item.getQty()); 
-	    	 }
+		for(Member m:memberArray) {
+	    	 if(m!=null)
+	    		 System.out.println(m);
 	    }
 	}
 
