@@ -25,29 +25,37 @@ public class MemberApplication {
 	}
 	System.out.println("프로그램 종료");
 	}
-
-	//회원 생성하기
-  private static void createItem(){
-   //회원id
-	  System.out.println("id>");
-	  String id=scanner.next();
-	//회원id
-	  System.out.println("비밀번호>");
-	  String password=scanner.next();
  
-	//회원이름
-	  System.out.println("상품명>");
-	  String name=scanner.next();
-     
-	  for(int i=0;i<memberArray.length;i++)
-		  if(memberArray[i]==null) {
-	        memberArray[i]=new Member(id, password, name);
-		  break;
-		  }
-	}
-
+	//회원 생성하기
+	private static void createMember() {
+		String id=null;
+		//회원id
+		do {  
+		     System.out.println("id>");
+		     id=scanner.next();
+		     if(findMember(id)!=null)
+		    	 System.out.println("이미 존재하는 id입니다.");
+		     else
+		    	 break;
+		  }while(true); 
+		
+		//회원비밀번호
+		  System.out.println("비밀번호>");
+		  String password=scanner.next();
+	 
+		//회원이름
+		  System.out.println("이름>");
+		  String name=scanner.next();
+	     
+		  for(int i=0;i<memberArray.length;i++)
+			  if(memberArray[i]==null) {
+		        memberArray[i]=new Member(id, password, name);
+			  break;
+			  }
+	
+}
 	//회원리스트 보기
-	private static void stockList(){
+	private static void memberList() {
 	 //작성위치
 		for(Member m:memberArray) {
 	    	 if(m!=null)
@@ -55,52 +63,41 @@ public class MemberApplication {
 	    }
 	}
 
-	//입고처리
+	//포인트 적립
 	private static void deposit(){
-	  //상품번호 찾기
-     System.out.println("상품번호");
-     String itemCode=scanner.next();
-     //입고
-     System.out.println("입고량");
-     int qty =scanner.nextInt();
- 
-     Item item=findItem(itemCode);    
-     if(item!=null) {
-    	 item.setQty(item.getQty()+qty);
-     }else {
-    	 System.out.println("해당 상품이 없습니다.");
-     }
-    
+	  //회원 찾기		
+		  System.out.println("id"); 
+		  String id=scanner.next(); //입고
+		  System.out.println("적립포인트"); 
+		  double point =scanner.nextDouble();
+		  Member member=findMember(id);
+		  if(findMember(id)!=null) {
+		     member.setPoint(member.getPoint()+point); 
+		  }else { 
+			 System.out.println("해당 회원이 없습니다."); 
+		 }
 	}
 
-	//출고하기
+	//포인트 차감
 	private static void withdraw(){
-		//상품번호 찾기
-	     System.out.println("상품번호");
-	     String itemCode=scanner.next();
-	     //입금액
-	     System.out.println("입금액");
-	     int qty =scanner.nextInt();
-	 
-	     Item item=findItem(itemCode);    
-	     if(item!=null) {
-	    	 if(item.getQty()-qty<0) {
-	    		 System.out.println("출고량이 현재고보다 많습니다.");
-	    		 return;
-	    	 }
-	    	 item.setQty(item.getQty()-qty);
-	     }else {
-	    	 System.out.println("해당상품이 없습니다.");
-	     }
+		//회원 찾기		
+		  System.out.println("id"); 
+		  String id=scanner.next(); //입고
+		  System.out.println("적립포인트"); 
+		  double point =scanner.nextDouble();
+		  Member member=findMember(id);
+		  if(findMember(id)!=null) {
+		     member.setPoint(member.getPoint() - point); 
+		  }else { 
+			 System.out.println("해당 회원이 없습니다."); 
+		 }
 	}
 
 	  //StockArray 배열에서 itemCode와 동일한 Item 객체 찾기
-	private static Item findItem(String itemCode){
-      for(int i=0;i<stockArray.length;i++) {
-    	  if(stockArray[i]!=null) {
-    		  Item item=stockArray[i];
-    		  if(item.getItemCode().equals(itemCode)) return item;
-    	  }
+	private static Member findMember(String id){
+      for(Member member:memberArray) {
+    	  if(member!=null)
+    		  if(member.getId().equals(id)) return member;
       }
 	 //작성위치
       return null;
@@ -108,9 +105,9 @@ public class MemberApplication {
 	
 	//메뉴출력
   static void printMenu() {
-	System.out.println("--------------------------------------------");
-	System.out.println("1.재고등록 | 2.재고목록 | 3.입고처리| 4. 출고처리| 5.종료");
-	System.out.println("--------------------------------------------");
+	System.out.println("----------------------------------------------");
+	System.out.println("1.회원등록 | 2.회원목록 | 3.포인트적립| 4.포인트차감| 5.종료");
+	System.out.println("----------------------------------------------");
   }
 
 	 
