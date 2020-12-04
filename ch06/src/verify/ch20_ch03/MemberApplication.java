@@ -27,10 +27,11 @@ public class MemberApplication {
 	}
  
 	//회원 생성하기
-	private static void createMember() {
+private static void createMember() {
 		String id=null;
 		//회원id
 		do {  
+			//id입력
 		     System.out.println("id>");
 		     id=scanner.next();
 		     if(findMember(id)!=null)
@@ -52,7 +53,6 @@ public class MemberApplication {
 		        memberArray[i]=new Member(id, password, name);
 			  break;
 			  }
-	
 }
 	//회원리스트 보기
 	private static void memberList() {
@@ -66,9 +66,9 @@ public class MemberApplication {
 	//포인트 적립
 	private static void deposit(){
 	  //회원 찾기		
-		  System.out.println("id"); 
+		  System.out.println("id>"); 
 		  String id=scanner.next(); //입고
-		  System.out.println("적립포인트"); 
+		  System.out.println("적립포인트>"); 
 		  double point =scanner.nextDouble();
 		  Member member=findMember(id);
 		  if(findMember(id)!=null) {
@@ -81,13 +81,17 @@ public class MemberApplication {
 	//포인트 차감
 	private static void withdraw(){
 		//회원 찾기		
-		  System.out.println("id"); 
+		  System.out.println("id>"); 
 		  String id=scanner.next(); //입고
-		  System.out.println("적립포인트"); 
+		  System.out.println("적립포인트>"); 
 		  double point =scanner.nextDouble();
 		  Member member=findMember(id);
 		  if(findMember(id)!=null) {
-		     member.setPoint(member.getPoint() - point); 
+			  if(member.getPoint() - point<0) {
+				  System.out.println("포인트를 차감할수 없습니다.");
+			  }else {
+		         member.setPoint(member.getPoint() - point);
+			  }
 		  }else { 
 			 System.out.println("해당 회원이 없습니다."); 
 		 }

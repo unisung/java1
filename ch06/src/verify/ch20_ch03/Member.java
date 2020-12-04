@@ -2,15 +2,15 @@ package verify.ch20_ch03;
 
 public class Member{
 	private String id;//상품코드
-	private String password;
+	private String password;//비번
 	private String name;//상품명
-	private double point;//재고수량
+	private double point;//포인트
 	
 	public Member(String id, String password, String name) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
-		this.point = 1000.0;
+		this.point = 1000.0;//초기포인트
 	}
 
 	public String getId() {
