@@ -20,13 +20,21 @@ public class MemberApplication {
 	}else if(selectNo==4){
 	 withdraw();
 	}else if(selectNo==5){
-	  run=false;
-	 }
+	  changePassword();
+	}else if(selectNo==6){
+		  run=false;
+	}
 	}
 	System.out.println("프로그램 종료");
 	}
  
-	//회원 생성하기
+ //비번 변경하기
+private static void changePassword() {
+	
+	
+}
+
+//회원 생성하기
 private static void createMember() {
 		String id=null;
 		//회원id
@@ -109,9 +117,9 @@ private static void createMember() {
 	
 	//메뉴출력
   static void printMenu() {
-	System.out.println("----------------------------------------------");
-	System.out.println("1.회원등록 | 2.회원목록 | 3.포인트적립| 4.포인트차감| 5.종료");
-	System.out.println("----------------------------------------------");
+	System.out.println("------------------------------------------------------");
+	System.out.println("1.회원등록 | 2.회원목록 | 3.포인트적립| 4.포인트차감|5.비번변경 | 6.종료");
+	System.out.println("------------------------------------------------------");
   }
 
 	 
